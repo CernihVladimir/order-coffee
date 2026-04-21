@@ -54,3 +54,9 @@ document.querySelectorAll('.beverage').forEach(addDeleteHandler);
 updateNumbers();
 
 addButton.addEventListener('click', addBeverage);
+
+const closeModalBtn = document.querySelector('.modal-close');
+
+closeModalBtn.addEventListener('click', () => {
+    modal.classList.remove('active');
+});
