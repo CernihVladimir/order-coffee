@@ -45,3 +45,21 @@
     border-radius: 5px;
 }
 
+.delete-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+    padding: 0 5px;
+}
+
+.delete-button:hover {
+    color: red;
+}
+
+.beverage {
+    position: relative;
+}
+
+
