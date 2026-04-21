@@ -1,10 +1,7 @@
 const submitButton = document.querySelector('.submit-button');
 const modal = document.getElementById('modal');
-submitButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    modal.classList.add('active');
-    console.log('заказ принят');
-});
+const modalMessage = document.getElementById('modal-message');
+
 const container = document.getElementById('beveragesContainer');
 const addButton = document.querySelector('.add-button');
 
@@ -49,6 +46,43 @@ function addBeverage() {
     addDeleteHandler(newBeverage);
     updateNumbers();
 }
+
+function declinateDrinks(count) {
+    const lastDigit = count % 10;
+    const lastTwoDigits = count % 100;
+    
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 20) {
+        return `${count} напитков`;
+    }
+    
+    if (lastDigit === 1) {
+        return `${count} напиток`;
+    } else if (lastDigit >= 2 && lastDigit <= 4) {
+        return `${count} напитка`;
+    } else {
+        return `${count} напитков`;
+    }
+}
+
+function showModal() {
+    const drinksCount = document.querySelectorAll('.beverage').length;
+    const message = `Вы заказали ${declinateDrinks(drinksCount)}`;
+    modalMessage.textContent = message;
+    modal.classList.add('active');
+}
+
+// Обработчик кнопки ""
+submitButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    showModal();
+});
+
+// Закрытие модального окна по клику на оверлей
+modal.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.classList.remove('active');
+    }
+});
 
 document.querySelectorAll('.beverage').forEach(addDeleteHandler);
 updateNumbers();
